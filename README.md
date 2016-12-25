@@ -27,10 +27,7 @@ For some features, you need to add configuration to your base `config.toml` para
 ```toml
 [params]
     amp = true # enables amp features
-    ampCdnRoot = "https://cdn.ampproject.org/" # defined base cdn root of the amp projects files
-    ampRelease = "v0" # define amp release you want to use
-    ampElementsVersion = "0.1" # define amp-elements version you want to use
-    
+   
     # define which amp-elements you are using globally, these elements will be included in every page
     ampElements = ["amp-accordion","amp-ad","amp-analytics","amp-carousel","amp-iframe","amp-app-banner","amp-dynamic-css-classes","amp-form","amp-fx-flying-carpet","amp-image-lightbox","amp-lightbox","amp-sidebar","amp-social-share","amp-sticky-ad","amp-user-notification"]
 
@@ -58,6 +55,7 @@ For some features, you need to add configuration to your base `config.toml` para
 
 ```
 
+Sources for AMP references are managed in the [data/amp-modules.json](data/amp-modules.json)-File.
 
 ### Styling
 
