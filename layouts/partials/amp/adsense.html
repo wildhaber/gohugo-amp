@@ -1,27 +1,27 @@
-{{ if isset $.Site.Params "adsensePublisher" }}
+{{ if isset $.Site.Params "adsensepublisher" }}
 
 {{ with .Params }}
-{{ with .sticky }}<amp-sticky-ad layout="nodisplay">{{ end }}
+    {{ with .sticky }}<amp-sticky-ad layout="nodisplay">{{ end }}
     <amp-ad type="adsense"
-            {{ if isset . "width" }}width="{{ .width }}"{{ end }}
-    {{ if isset . "height" }}height="{{ .height }}"{{ end }}
+            {{ with .width }}width="{{ . }}"{{ end }}
+    {{ with .height }}height="{{ . }}"{{ end }}
     {{ with .layout }}layout="{{ . }}"{{ end }}
     data-ad-client="{{ $.Site.Params.adsensePublisher }}"
-    {{ if isset . "slot" }}data-ad-slot="{{ .slot }}"{{ end }}>
+    {{ with .slot }}data-ad-slot="{{ . }}"{{ end }}>
     </amp-ad>
     {{ with .sticky }}</amp-sticky-ad>{{ end }}
 {{ end }}
-{{ else }}
 
+{{ else }}
 {{ if isset . "context" }}
 {{ $publisher := .context.Site.Params.adsensePublisher }}
 {{ with .sticky }}<amp-sticky-ad layout="nodisplay">{{ end }}
     <amp-ad type="adsense"
-            {{ if isset . "width" }}width="{{ .width }}"{{ end }}
-    {{ if isset . "height" }}height="{{ .height }}"{{ end }}
+            {{ with .width }}width="{{ . }}"{{ end }}
+    {{ with .height }}height="{{ . }}"{{ end }}
     {{ with .layout }}layout="{{ . }}"{{ end }}
     data-ad-client="{{ $publisher }}"
-    {{ if isset . "slot" }}data-ad-slot="{{ .slot }}"{{ end }}>
+    {{ with .slot }}data-ad-slot="{{ . }}"{{ end }}>
     </amp-ad>
     {{ with .sticky }}</amp-sticky-ad>{{ end }}
 {{ end }}
