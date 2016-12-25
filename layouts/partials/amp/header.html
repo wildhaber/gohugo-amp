@@ -1,21 +1,26 @@
 {{ if isset $.Site.Params "amp" }}
 
-    {{ range $.Site.Params.ampElements }}
-        <script async custom-element="{{ . }}" src="{{ $.Site.Params.ampCdnRoot }}{{ $.Site.Params.ampRelease }}/{{ . }}-{{ $.Site.Params.ampElementsVersion }}.js"></script>
-    {{ end }}
+    {{- range $.Site.Params.ampElements -}}
+        {{- if (index (index $.Site.Data "amp-modules") .) -}}
+            <script async custom-element="{{ . }}" src="{{ (index (index $.Site.Data "amp-modules") .) }}"></script>
+        {{- end }}
+    {{- end }}
 
     {{ with .Params.amp.elements }}
         {{ range . }}
             {{ if in $.Site.Params.ampElements . }}
             {{ else }}
-                <script async custom-element="{{ . }}" src="{{ $.Site.Params.ampCdnRoot }}{{ $.Site.Params.ampRelease }}/{{ . }}-{{ $.Site.Params.ampElementsVersion }}.js"></script>
+                {{- if (index (index $.Site.Data "amp-modules") .) -}}
+                    <script async custom-element="{{ . }}" src="{{ (index (index $.Site.Data "amp-modules") .) }}"></script>
+                {{- end }}
             {{ end }}
         {{ end }}
     {{ end }}
 
-    <script async src="{{ $.Site.Params.ampCdnRoot }}{{ $.Site.Params.ampRelease }}.js"></script>
+    {{- $ampCorePath := index (index $.Site.Data "amp-modules") "amp-core" -}}
+    <script async src="{{ $ampCorePath }}"></script>
 
-    {{ if isset $.Site.Params "ampManifest" }}
+    {{ if isset $.Site.Params "ampmanifest" }}
         {{ partial "amp/app-banner-header" . }}
     {{ end }}
 
